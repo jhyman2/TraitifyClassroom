@@ -1,0 +1,8 @@
+from django.conf.urls import patterns, include, url
+#from tests import views
+
+urlpatterns = patterns('tests',
+	url(r'log/$', 'tests.views.log', name='log'),
+	url(r'assess/$', 'tests.views.testDetail', name='test_detail'),
+	url(r'assess/result/$', 'tests.views.testResult', name='test_result'),
+)
