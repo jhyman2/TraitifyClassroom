@@ -2,6 +2,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../css/form.css" />
     <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css" />
+    <script src="https://cdn.traitify.com/lib/v1.js"></script>
   </head>
   <body>
   <form class="go-bottom">
@@ -39,5 +40,15 @@
     <br/>
      <button type="button" class="btn btn-primary">Student</button>
   </form>
+
+    <div class="assessment"></div>
+    <script>
+      Traitify.setPublicKey("8rpjfgcnemvjc11607t9pcn9e");
+      Traitify.setHost("https://api-sandbox.traitify.com");
+      Traitify.setVersion("v1");
+      var assessmentId = 'd8f4c075-0c16-4890-88b3-31ebe95000a9';
+      Traitify.ui.load(assessmentId, ".assessment")
+    </script>
+
   </body>
 </html>
