@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../css/form.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css" />
+    <script src="https://cdn.traitify.com/lib/v1.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../css/bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+
+      <script type="text/javascript">
+      $(window).load(function(){
+          $('#assessment').css({'display': 'inline-block'});
+      });
+  </script>
+
+
+    <div class="assessment"></div>
+    <script>
+      Traitify.setPublicKey("8rpjfgcnemvjc11607t9pcn9e");
+      Traitify.setHost("https://api-sandbox.traitify.com");
+      Traitify.setVersion("v1");
+      var assessmentId = 'd8f4c075-0c16-4890-88b3-31ebe95000a9';
+      slideDeck = Traitify.ui.load(assessmentId, ".assessment").slideDeck;
+
+      slideDeck.onFinished(function(){
+        var assessment = $.post("/assessments/finished");
+        // assessment.then(function(){
+        //   window.location = "/assessment"
+        // });
+         assessment.catch(function(){
+          console.log("It didn't work");
+         });
+        console.log(slideDeck);
+        console.log("Finished!");
+    });
+    </script>
+  </body>
+</html>

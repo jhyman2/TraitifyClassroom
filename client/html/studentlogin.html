@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../css/form.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css" />
+    <script src="https://cdn.traitify.com/lib/v1.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../css/bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      $(window).load(function(){
+          $('#quizStartBtn').click(function() {
+            $('.go-right').css({'display': 'none'});
+            $('.assessment').css({'display': 'inline-block'});
+          });
+      });
+  	</script>
+  	
+   <form class="go-right" action="/tests/log/" method="post">
+    <h2>Who are you?</h2>
+    <div>
+      <input id="FirstName" name="FirstName" type="text" required>
+      <label for="FirstName">First Name</label>
+    </div>
+    <div>
+      <input id="LastName" name="LastName" type="text" required>
+      <label for="LastName">Last Name</label>
+    </div>
+    <br/>
+     <button type="submit" id= "quizStartBtn" class="btn btn-primary" value="Submit">Start Quiz</button>
+  </form>
+
+  </body>
+</html>

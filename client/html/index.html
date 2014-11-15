@@ -8,16 +8,12 @@
   </head>
   <body>
 
-  <!--modal popup -->
   <script type="text/javascript">
       $(window).load(function(){
           $('#myModal').modal('show');
-          $('.go-right').css({'display': 'none'});
-          $('.assessment').css({'display': 'none'});
 
           $('#studentBtn').click(function() {
-            $('#myModal').modal('hide');
-            $('.go-right').css({'display': 'inline-block'});
+            window.location.replace("studentlogin.html");
           });
 
           $('#quizStartBtn').click(function() {
@@ -28,8 +24,8 @@
           });
 
           $('#teacherBtn').click(function() {
-            $('#myModal').modal('hide');
             // GO TO TEACHER PAGE
+            // window.location.replace("teacheradmin.html");
             alert("Going to teacher page");
           });
 
@@ -59,41 +55,6 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-
-  <form class="go-right" action="/tests/log/" method="post">
-    <h2>Who are you?</h2>
-    <div>
-      <input id="FirstName" name="FirstName" type="text" required>
-      <label for="FirstName">First Name</label>
-    </div>
-    <div>
-      <input id="LastName" name="LastName" type="text" required>
-      <label for="LastName">Last Name</label>
-    </div>
-    <br/>
-     <button type="submit" id= "quizStartBtn" class="btn btn-primary" value="Submit">Start Quiz</button>
-  </form>
-
-    <div class="assessment"></div>
-    <script>
-      Traitify.setPublicKey("8rpjfgcnemvjc11607t9pcn9e");
-      Traitify.setHost("https://api-sandbox.traitify.com");
-      Traitify.setVersion("v1");
-      var assessmentId = 'd8f4c075-0c16-4890-88b3-31ebe95000a9';
-      slideDeck = Traitify.ui.load(assessmentId, ".assessment").slideDeck;
-
-      slideDeck.onFinished(function(){
-        var assessment = $.post("/assessments/finished");
-        // assessment.then(function(){
-        //   window.location = "/assessment"
-        // });
-         assessment.catch(function(){
-          console.log("It didn't work");
-         });
-        console.log(slideDeck);
-        console.log("Finished!");
-    });
-    </script>
 
   </body>
 </html>
