@@ -27,6 +27,12 @@
             var lastName = $('#LastName').val();
           });
 
+          $('#teacherBtn').click(function() {
+            $('#myModal').modal('hide');
+            // GO TO TEACHER PAGE
+            alert("Going to teacher page");
+          });
+
       });
   </script>
 
@@ -43,7 +49,7 @@
                 <button type="button" id="studentBtn" class="btn btn-primary btn-lg">Student</button>
               </div>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-info btn-lg">Teacher</button>
+                <button type="button" id="teacherBtn" class="btn btn-info btn-lg">Teacher</button>
               </div>
             </div>
         </div>
