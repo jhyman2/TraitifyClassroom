@@ -3,8 +3,29 @@
     <link rel="stylesheet" type="text/css" href="../css/form.css" />
     <link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css" />
     <script src="https://cdn.traitify.com/lib/v1.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../css/bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+         <p>One fine body&hellip;</p>
+       </div>
+       <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+       <button type="button" class="btn btn-primary">I'm a student</button>
+      <button type="button" class="btn btn-primary">I'm a teacher</button>
   <form class="go-bottom">
     <h2>To Bottom</h2>
     <div>
@@ -47,7 +68,7 @@
       Traitify.setHost("https://api-sandbox.traitify.com");
       Traitify.setVersion("v1");
       var assessmentId = 'd8f4c075-0c16-4890-88b3-31ebe95000a9';
-      Traitify.ui.load(assessmentId, ".assessment")
+      Traitify.ui.load(assessmentId, ".assessment");
     </script>
 
   </body>
