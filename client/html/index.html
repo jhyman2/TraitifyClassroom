@@ -8,29 +8,33 @@
   </head>
   <body>
 
-  <button type="button" class="btn btn-primary">I'm a student</button>
-  <button type="button" class="btn btn-primary">I'm a teacher</button>
-
   <!--modal popup -->
   <script type="text/javascript">
       $(window).load(function(){
           $('#myModal').modal('show');
+          $('.go-right').css({'display': 'none'});
+          $('.assessment').css({'display': 'none'});
       });
   </script>
 
   <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title">Hello, welcome to Traitify Student Matching</h4>
         </div>
         <div class="modal-body">
-          <p>Are you a student or a teacher?</p>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary">Student</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-info">Teacher</button>
+              </div>
+            </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Student</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Teacher</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
