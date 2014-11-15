@@ -17,20 +17,23 @@
 
     <div class="assessment"></div>
     <script>
-      Traitify.setPublicKey("8rpjfgcnemvjc11607t9pcn9e");
+      Traitify.setPublicKey("sq1ekdq2849c1778327k1cfqho");
       Traitify.setHost("https://api-sandbox.traitify.com");
       Traitify.setVersion("v1");
-      var assessmentId = 'd8f4c075-0c16-4890-88b3-31ebe95000a9';
+      var assessmentId = "{{test_id}}";
       slideDeck = Traitify.ui.load(assessmentId, ".assessment").slideDeck;
 
       slideDeck.onFinished(function(){
         var assessment = $.post("/assessments/finished");
-        // assessment.then(function(){
-        //   window.location = "/assessment"
-        // });
-         assessment.catch(function(){
-          console.log("It didn't work");
+         assessment.then(function(){
+          console.log("Done and posted");
+           //window.location = "/assessment"
          });
+         // assessment.catch(function(){
+         //  console.log("It didn't work");
+         // });
+
+
         console.log(slideDeck);
         console.log("Finished!");
     });
