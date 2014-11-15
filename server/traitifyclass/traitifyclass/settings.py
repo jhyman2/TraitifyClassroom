@@ -26,6 +26,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_DIRS = (
+    "/home/prod1/TraitifyClassroom/client/html",
+)
 
 # Application definition
 

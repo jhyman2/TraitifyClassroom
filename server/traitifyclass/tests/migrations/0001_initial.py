@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
                 ('first', models.CharField(max_length=100)),
                 ('last', models.CharField(max_length=100)),
                 ('test_id', models.CharField(max_length=256)),
+                ('finished_test', models.BooleanField(default=False)),
             ],
             options={
             },

@@ -26,6 +26,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_DIRS = (
+    "/home/Home/TraitifyClassroom/client/html",
+)
 
 # Application definition
 
@@ -36,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tests',
 )
 
 MIDDLEWARE_CLASSES = (
