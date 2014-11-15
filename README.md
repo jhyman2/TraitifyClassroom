@@ -1,5 +1,6 @@
 TraitifyClassroom
 =================
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/jhyman2/TraitifyClassroom?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 TraitifyClassroom uses Traitify's personality test to help teachers cater a classroom curriculum to their students' personalities.
 
