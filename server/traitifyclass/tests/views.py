@@ -1,7 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from models import Student
 from forms import StudentForm
 from traitify import Traitify
 from django.template import RequestContext, loader
+import string
+import random
 
 public_key = 'sq1ekdq2849c1778327k1cfqho'
 secret_key = 'cdpfn6kmpktklsmtttjerd7fg1'
@@ -42,3 +45,23 @@ def testResult(request):
 	cur_stu.finished_test = True
 	cur_stu.save()
 	return render(request, 'tests/assess_confirm.html', {})
+	
+def generate(request, user_count):
+	traitify = Traitify(secret_key)
+	decks = traitify.get_decks()
+	traitify.deck_id = decks[0].id
+	for i in range(user_count):
+		cur_id = traitify.create_assessment().id
+		first_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
+		last_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
+		my_stu = Student.objects.create_student(first=first_name,last=last_name,test_id=cur_id)
+		slides = traitify.get_slides(cur_id)
+		for slide in slides:
+			slide.response = random.choice([True, False])
+			slide.time_taken = 200
+		slides = traitify.update_slides(cur_id, slides)
+		my_stu.finished_test = True
+		my_stu.save()
+	return render(request, 'random_gen.html', {'count': user_count})
+
+	
