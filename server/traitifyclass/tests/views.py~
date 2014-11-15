@@ -30,8 +30,8 @@ def log(request):
 			return HttpResponseRedirect('/tests/assess/')
 	else:
 		form = StudentForm()
-	template = loader.get_template('studentlogin.html')
-	return render(request, template, {'form': form})
+	#template = loader.get_template('studentlogin.html')
+	return render(request, 'studentlogin.html', {'form': form})
 	
 def testDetail(request):
 	session_id = request.session['test_id']

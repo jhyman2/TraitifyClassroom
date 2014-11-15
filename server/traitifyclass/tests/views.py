@@ -35,7 +35,7 @@ def log(request):
 	
 def testDetail(request):
 	session_id = request.session['test_id']
-	return render(request, 'tests/assess.html', {'test_id': session_id})
+	return render(request, 'studentquiz.html', {'test_id': session_id})
 	
 def testResult(request):
 	cur_stu = get_object_or_404(Student, pk=request.session['stu_id'])
