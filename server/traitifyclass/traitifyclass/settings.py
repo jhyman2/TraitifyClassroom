@@ -26,6 +26,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_DIRS = (
+    "/Users/jhyman2/apps/BaltimoreHackathon/TraitifyClassroom/client/html",
+)
 
 # Application definition
 

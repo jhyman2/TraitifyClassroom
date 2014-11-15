@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from forms import StudentForm
 from traitify import Traitify
+from django.template import RequestContext, loader
 
 public_key = 'sq1ekdq2849c1778327k1cfqho'
 secret_key = 'cdpfn6kmpktklsmtttjerd7fg1'
@@ -24,17 +25,20 @@ def log(request):
 			print test_id
 			stu.test_id = test_id
 			stu.save()
+			request.session['stu_id'] = stu.id
 			request.session['test_id'] = test_id
 			return HttpResponseRedirect('/tests/assess/')
 	else:
 		form = StudentForm()
-	return render(request, 'tests/log.html', {'form': form})
+	#template = loader.get_template('studentlogin.html')
+	return render(request, 'studentlogin.html', {'form': form})
 	
 def testDetail(request):
 	session_id = request.session['test_id']
 	return render(request, 'tests/assess.html', {'test_id': session_id})
 	
 def testResult(request):
-	cur_stu = Student.objects.get(test_id=request.session['test_id'])
-	cur_stu.finished_test = False
+	cur_stu = get_object_or_404(Student, pk=request.session['stu_id'])
+	cur_stu.finished_test = True
+	cur_stu.save()
 	return render(request, 'tests/assess_confirm.html', {})
