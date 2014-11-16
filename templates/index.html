@@ -9,6 +9,7 @@
   </head>
   <body>
 
+  <!-- Shows modal and redirects for students and teachers -->
   <script type="text/javascript">
       $(window).load(function(){
           $('#myModal').modal('show');
@@ -16,14 +17,13 @@
           $('#studentBtn').click(function() {
             window.location.assign("/tests/log/");
           });
-
           $('#teacherBtn').click(function() {
             window.location.assign("/admin/");
           });
-
       });
   </script>
 
+  <!-- Modal for selecting TEACHER or STUDENT -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="modal-footer">
-        <p style="opacity: 0.5;">Developed by Pat, Jon, and Jamison</p>
+          <p style="opacity: 0.5;">Developed by Pat, Jon, and Jamison</p>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
