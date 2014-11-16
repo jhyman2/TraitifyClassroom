@@ -13,6 +13,34 @@ from traitify import Traitify
 public_key = 'sq1ekdq2849c1778327k1cfqho'
 secret_key = 'cdpfn6kmpktklsmtttjerd7fg1'
 
+class PictureView(View):
+	def get(self, request, *args, **kwargs):
+		pass
+
+	def aggregrate_data():
+		#complete_students = Student.obects.filter(finished_test=True)
+		#for stu in complete_students:
+		#	# Get an assessment's results (personality types)
+		#personality_types = traitify.get_personality_types(assessment.id)
+		# Get an assessment's results (personality type traits)
+		#personality_type = personality_types["personality_types"][0]["personality_type"]
+		#main_trait = personality_type.name
+		#add main_trait to list
+		pass
+
+	def generate_png():
+		#import matplotlib
+		#matplotlib.use('Agg')
+		#import matplotlib.pyplot as plt
+		#labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+		#sizes = [15, 30, 45, 10]
+		#colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+		#plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+		 #   autopct='%1.1f%%', shadow=True, startangle=90)
+		# Set aspect ratio to be equal so that pie is drawn as a circle.
+		#plt.axis('equal')
+		#plt.savefig('mypng.png')
+		pass
 
 class LogView(View):
 
@@ -49,16 +77,12 @@ class TestDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         session_id = self.request.session['test_id']
         return {'test_id': session_id}
-
-
-class TestResultView(View):
-
-    def get(self, request, *args, **kwargs):
-        cur_stu = get_object_or_404(Student, pk=request.session['stu_id'])
-        cur_stu.finished_test = True
-        cur_stu.save()
-        return render(request, 'assess_confirm.html', {})
-
+        
+    def post(self, request, *args, **kwargs):
+		cur_stu = get_object_or_404(Student, pk=request.session['stu_id'])
+		cur_stu.finished_test = True
+		cur_stu.save()
+		return {}
 
 class GenerateView(View):
 
