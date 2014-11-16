@@ -10,6 +10,10 @@ from models import Student
 from forms import StudentForm
 from traitify import Traitify
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 public_key = 'sq1ekdq2849c1778327k1cfqho'
 secret_key = 'cdpfn6kmpktklsmtttjerd7fg1'
 
@@ -35,18 +39,16 @@ class PictureView(View):
 		return trait_count
 
 	def generate_png(self, trait_dict):
-		import matplotlib
-		matplotlib.use('Agg')
-		import matplotlib.pyplot as plt
 		labels = trait_dict.keys()
 		sizes = []
 		for t in labels:
+			print t
 			sizes.append(trait_dict[t])
 		plt.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True)
 		plt.axis('equal')
 		pict_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(12))
-		pict_name = 'static/' + pict_name + '.png'
-		plt.savefig(pict_name)
+		pict_name = pict_name + '.png'
+		plt.savefig('static/' + pict_name)
 		return pict_name
 		
 	def get(self, request, *args, **kwargs):
