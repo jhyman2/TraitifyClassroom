@@ -29,7 +29,6 @@ class PictureView(View):
 			main_trait = personality_type.name
 			trait_list.append(main_trait)
 		for trait in set(trait_list):
-			print trait
 			trait_count[trait] = 0
 		for i in trait_list:
 			trait_count[i] += 1
@@ -39,23 +38,21 @@ class PictureView(View):
 		import matplotlib
 		matplotlib.use('Agg')
 		import matplotlib.pyplot as plt
-		#labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
 		labels = trait_dict.keys()
-		#sizes = [15, 30, 45, 10]
 		sizes = []
 		for t in labels:
 			sizes.append(trait_dict[t])
-		#colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
 		plt.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True)
-		# Set aspect ratio to be equal so that pie is drawn as a circle.
 		plt.axis('equal')
-		plt.savefig('mypic.png')
-		return 'mypic.png'
+		pict_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(12))
+		pict_name = 'static/' + pict_name + '.png'
+		plt.savefig(pict_name)
+		return pict_name
 		
 	def get(self, request, *args, **kwargs):
 		trait_dict = self.aggregrate_data()
 		pict = self.generate_png(trait_dict)
-		return HttpResponse('')
+		return render(request, 'groupimage.html', {'pict': pict})
 		
 class LogView(View):
 
