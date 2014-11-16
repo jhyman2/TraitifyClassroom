@@ -1,7 +1,5 @@
 from django.conf.urls import patterns, url
-
 from views import LogView, TestDetailView, TestResultView, GenerateView
-
 
 urlpatterns = patterns(
     '',
