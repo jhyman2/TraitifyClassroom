@@ -19,13 +19,37 @@ def get_assessment():
 	assessment = traitify.create_assessment()
 	return assessment.id
 
+def aggregrate_data():
+	#complete_students = Student.obects.filter(finished_test=True)
+	#for stu in complete_students:
+	#	# Get an assessment's results (personality types)
+	#personality_types = traitify.get_personality_types(assessment.id)
+	# Get an assessment's results (personality type traits)
+	#personality_type = personality_types["personality_types"][0]["personality_type"]
+	#main_trait = personality_type.name
+	#add main_trait to list
+	pass
+
+def generate_png():
+	#import matplotlib
+	#matplotlib.use('Agg')
+	#import matplotlib.pyplot as plt
+	#labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+	#sizes = [15, 30, 45, 10]
+	#colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+	#plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+     #   autopct='%1.1f%%', shadow=True, startangle=90)
+	# Set aspect ratio to be equal so that pie is drawn as a circle.
+	#plt.axis('equal')
+	#plt.savefig('mypng.png')
+	pass
+
 def log(request):
 	if request.method == "POST":
 		form = StudentForm(request.POST)
 		if form.is_valid():
 			stu = form.save()
 			test_id = get_assessment()
-			print test_id
 			stu.test_id = test_id
 			stu.save()
 			request.session['stu_id'] = stu.id
@@ -38,23 +62,25 @@ def log(request):
 	
 def testDetail(request):
 	session_id = request.session['test_id']
-	return render(request, 'studentquiz.html', {'test_id': session_id})
-	
-def testResult(request):
-	cur_stu = get_object_or_404(Student, pk=request.session['stu_id'])
-	cur_stu.finished_test = True
-	cur_stu.save()
-	return render(request, 'tests/assess_confirm.html', {})
+	if request.method == 'POST':
+		cur_stu = get_object_or_404(Student, pk=request.session['stu_id'])
+		cur_stu.finished_test = True
+		cur_stu.save()
+		return HttpResponse('')
+		#alternatively, just do the same thing
+	else:
+		return render(request, 'studentquiz.html', {'test_id': session_id})
 	
 def generate(request, user_count):
 	traitify = Traitify(secret_key)
 	decks = traitify.get_decks()
 	traitify.deck_id = decks[0].id
-	for i in range(user_count):
+	for i in range(int(user_count)):
 		cur_id = traitify.create_assessment().id
 		first_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
 		last_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
 		my_stu = Student.objects.create_student(first=first_name,last=last_name,test_id=cur_id)
+		print my_stu.pk
 		slides = traitify.get_slides(cur_id)
 		for slide in slides:
 			slide.response = random.choice([True, False])
