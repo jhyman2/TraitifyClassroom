@@ -4,7 +4,7 @@ import random
 from django.core.urlresolvers import reverse
 from django.views.generic import View
 from django.views.generic import TemplateView
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, get_object_or_404
 
 from models import Student
 from forms import StudentForm
@@ -14,34 +14,49 @@ public_key = 'sq1ekdq2849c1778327k1cfqho'
 secret_key = 'cdpfn6kmpktklsmtttjerd7fg1'
 
 class PictureView(View):
-	def get(self, request, *args, **kwargs):
-		pass
 
-	def aggregrate_data():
-		#complete_students = Student.obects.filter(finished_test=True)
-		#for stu in complete_students:
-		#	# Get an assessment's results (personality types)
-		#personality_types = traitify.get_personality_types(assessment.id)
-		# Get an assessment's results (personality type traits)
-		#personality_type = personality_types["personality_types"][0]["personality_type"]
-		#main_trait = personality_type.name
-		#add main_trait to list
-		pass
+	def aggregrate_data(self):
+		traitify = Traitify(secret_key)
+		decks = traitify.get_decks()
+		traitify.deck_id = decks[0].id
+		complete_students = Student.objects.filter(finished_test=True)
+		trait_list = []
+		trait_count = {}
+		for stu in complete_students:
+			personality_types = traitify.get_personality_types(stu.test_id)
+			# Get an assessment's results (personality type traits)
+			personality_type = personality_types["personality_types"][0]["personality_type"]
+			main_trait = personality_type.name
+			trait_list.append(main_trait)
+		for trait in set(trait_list):
+			print trait
+			trait_count[trait] = 0
+		for i in trait_list:
+			trait_count[i] += 1
+		return trait_count
 
-	def generate_png():
-		#import matplotlib
-		#matplotlib.use('Agg')
-		#import matplotlib.pyplot as plt
+	def generate_png(self, trait_dict):
+		import matplotlib
+		matplotlib.use('Agg')
+		import matplotlib.pyplot as plt
 		#labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+		labels = trait_dict.keys()
 		#sizes = [15, 30, 45, 10]
+		sizes = []
+		for t in labels:
+			sizes.append(trait_dict[t])
 		#colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
-		#plt.pie(sizes, explode=explode, labels=labels, colors=colors,
-		 #   autopct='%1.1f%%', shadow=True, startangle=90)
+		plt.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True)
 		# Set aspect ratio to be equal so that pie is drawn as a circle.
-		#plt.axis('equal')
-		#plt.savefig('mypng.png')
-		pass
-
+		plt.axis('equal')
+		plt.savefig('mypic.png')
+		return 'mypic.png'
+		
+	def get(self, request, *args, **kwargs):
+		trait_dict = self.aggregrate_data()
+		pict = self.generate_png(trait_dict)
+		return HttpResponse('')
+		
 class LogView(View):
 
     def get(self, request, *args, **kwargs):
@@ -90,7 +105,7 @@ class GenerateView(View):
         traitify = Traitify(secret_key)
         decks = traitify.get_decks()
         traitify.deck_id = decks[0].id
-        for i in range(user_count):
+        for i in range(int(user_count)):
             cur_id = traitify.create_assessment().id
             first_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
             last_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
