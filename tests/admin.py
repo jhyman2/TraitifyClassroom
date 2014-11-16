@@ -1,8 +1,8 @@
 from django.contrib import admin
 from models import Student
-from django.contrib.admin import AdminSite
+from django.contrib.admin import AdminSite, ModelAdmin
 
-class StudentAdmin(admin.ModelAdmin):
+class StudentAdmin(ModelAdmin):
 	fields = ['first', 'last', 'test_id', 'finished_test']
 
 class MyAdminSite(AdminSite):
