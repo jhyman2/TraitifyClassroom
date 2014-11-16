@@ -14,20 +14,11 @@
           $('#myModal').modal('show');
 
           $('#studentBtn').click(function() {
-            window.location.replace("studentlogin.html");
-          });
-
-          $('#quizStartBtn').click(function() {
-            $('.go-right').css({'display': 'none'});
-            $('.assessment').css({'display': 'inline-block'});
-            var firstName = $('#FirstName').val();
-            var lastName = $('#LastName').val();
+            window.location.assign("/tests/log/");
           });
 
           $('#teacherBtn').click(function() {
-            // GO TO TEACHER PAGE
-            // window.location.replace("teacheradmin.html");
-            alert("Going to teacher page");
+            window.location.assign("/admin/");
           });
 
       });
