@@ -7,4 +7,5 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^tests/', include('tests.urls', namespace='tests')),
 	url(r'^', views.home),
+    url(r'^admin/', include(admin.site.urls)),
 )
