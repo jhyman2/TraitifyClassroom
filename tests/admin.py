@@ -6,7 +6,7 @@ class StudentAdmin(ModelAdmin):
 	fields = ['first', 'last', 'test_id', 'finished_test']
 
 class MyAdminSite(AdminSite):
-    site_header = 'Monty Python administration'
+    site_header = 'Traitify Teacher Login'
 
 admin_site = MyAdminSite(name='myadmin')
 admin_site.register(Student, StudentAdmin)
