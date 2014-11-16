@@ -74,11 +74,10 @@ form.go-right label {
   right: 100%;
   width: 100%;
   margin-right: -100%;
-  bottom: 2px;
 }
 form.go-right input:focus + label, form.go-right textarea:focus + label {
   right: 0;
   margin-right: 0;
-  width: 40%;
+  width: 25%;
   padding-top: 5px;
 }
