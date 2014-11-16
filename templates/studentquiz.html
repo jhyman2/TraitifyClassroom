@@ -31,7 +31,7 @@
       slideDeck = Traitify.ui.load(assessmentId, ".assessment").slideDeck;
 
       slideDeck.onFinished(function(){
-        var assessment = $.post("/tests/assess",  {csrfmiddlewaretoken:'{{csrf_token}}'});
+        var assessment = $.post("/tests/assess/",  {csrfmiddlewaretoken:'{{csrf_token}}'});
          assessment.then(function(){
           sweetAlert("Good job!", "You have completed the exam.  Your teacher can now review your results.", "success");
          });

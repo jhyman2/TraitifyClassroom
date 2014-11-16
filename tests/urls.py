@@ -1,9 +1,12 @@
-from django.conf.urls import patterns, include, url
-#from tests import views
+from django.conf.urls import patterns, url
 
-urlpatterns = patterns('tests',
-	url(r'log/$', 'views.log', name='log'),
-	url(r'assess/$', 'views.testDetail', name='test_detail'),
-	#url(r'assess/result/$', 'views.testResult', name='test_result'),
-	url(r'generate/(?P<user_count>\d+)/$', 'views.generate', name='generate'),
+from views import LogView, TestDetailView, TestResultView, GenerateView
+
+
+urlpatterns = patterns(
+    '',
+    url(r'log/$', LogView.as_view(), name='log'),
+    url(r'assess/$', TestDetailView.as_view(), name='test_detail'),
+    url(r'assess/result/$', TestResultView.as_view(), name='test_result'),
+    url(r'generate/(?P<user_count>\d+)/$', GenerateView.as_view(), name='generate'),
 )
